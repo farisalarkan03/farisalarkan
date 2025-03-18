@@ -1,22 +1,24 @@
-const express = require("express");
-const fs = require("fs");
-const path = require("path");
+document.addEventListener("DOMContentLoaded", () => {
+    const gallery = document.getElementById("gallery");
+    const images = [
+        "img/image1.jpg",
+        "img/image2.jpg",
+        "img/image3.jpg",
+        "img/image4.jpg"
+    ]; // Gantilah dengan nama file yang ada di folder img/
 
-const app = express();
-const imgDir = path.join(__dirname, "img");
+    images.forEach(image => {
+        const img = document.createElement("img");
+        img.src = image;
+        img.alt = image.split("/").pop().split(".")[0];
+        img.addEventListener("click", () => {
+            document.getElementById("popup-img").src = img.src;
+            document.getElementById("popup").style.display = "flex";
+        });
+        gallery.appendChild(img);
+    });
 
-app.use(express.static("public"));
-app.use("/img", express.static(imgDir));
-
-app.get("/img", (req, res) => {
-    fs.readdir(imgDir, (err, files) => {
-        if (err) {
-            return res.status(500).json({ error: "Gagal membaca folder gambar." });
-        }
-        const imageFiles = files.filter(file => /\.(jpg|jpeg|png|gif)$/i.test(file));
-        res.json(imageFiles);
+    document.querySelector(".close").addEventListener("click", () => {
+        document.getElementById("popup").style.display = "none";
     });
 });
-
-const PORT = 3000;
-app.listen(PORT, () => console.log(`Server berjalan di http://localhost:${PORT}`));
