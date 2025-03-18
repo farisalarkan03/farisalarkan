@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
     const gallery = document.getElementById("gallery");
     const images = [
-        "img/image1.jpg",
-        "img/image2.jpg",
+        "img/Photo from Faris Al Arkan (3).jpg",
+        "img/Photo from Faris Al Arkan (2).jpg",
         "img/image3.jpg",
         "img/image4.jpg"
     ]; // Gantilah dengan nama file yang ada di folder img/
